@@ -3,6 +3,7 @@
 from typing import Any
 
 from anthropic import Anthropic
+from anthropic.types import TextBlock
 
 from financial_qa.client.base import LLMClient, LLMMessage, LLMResponse, Role
 
@@ -54,8 +55,9 @@ class AnthropicClient(LLMClient):
             messages=chat_messages,  # type: ignore[arg-type]
         )
 
+        text_block = next(b for b in response.content if isinstance(b, TextBlock))
         return LLMResponse(
-            content=response.content[0].text,
+            content=text_block.text,
             model=response.model,
             input_tokens=response.usage.input_tokens,
             output_tokens=response.usage.output_tokens,
