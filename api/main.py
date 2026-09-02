@@ -1,7 +1,7 @@
 """FastAPI application for the financial QA pipeline."""
 
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import AsyncIterator
 
 from fastapi import FastAPI, HTTPException
 
@@ -10,7 +10,6 @@ from financial_qa.cache import PredictionCache
 from financial_qa.client.factory import make_client
 from financial_qa.config import settings
 from financial_qa.pipeline.runner import PipelineRunner
-
 
 _runner: PipelineRunner | None = None
 _cache: PredictionCache | None = None
