@@ -1,5 +1,7 @@
 """Groq client implementation (OpenAI-compatible API)."""
 
+from typing import Any
+
 from groq import Groq
 
 from financial_qa.client.base import LLMClient, LLMMessage, LLMResponse
@@ -30,14 +32,18 @@ class GroqClient(LLMClient):
         self._max_tokens = max_tokens
         self._temperature = temperature
 
-    def complete(self, messages: list[LLMMessage], **kwargs: object) -> LLMResponse:
+    def complete(self, messages: list[LLMMessage], **kwargs: Any) -> LLMResponse:
         """Send messages to Groq and return the response."""
         groq_messages = [{"role": m.role.value, "content": m.content} for m in messages]
 
+        model: str = kwargs.get("model", self._model)
+        max_tokens: int = kwargs.get("max_tokens", self._max_tokens)
+        temperature: float = kwargs.get("temperature", self._temperature)
+
         response = self._client.chat.completions.create(
-            model=kwargs.get("model", self._model),  # type: ignore[arg-type]
-            max_tokens=kwargs.get("max_tokens", self._max_tokens),  # type: ignore[arg-type]
-            temperature=kwargs.get("temperature", self._temperature),  # type: ignore[arg-type]
+            model=model,
+            max_tokens=max_tokens,
+            temperature=temperature,
             messages=groq_messages,  # type: ignore[arg-type]
         )
 

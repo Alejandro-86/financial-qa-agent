@@ -1,5 +1,7 @@
 """Anthropic (Claude) client implementation."""
 
+from typing import Any
+
 from anthropic import Anthropic
 
 from financial_qa.client.base import LLMClient, LLMMessage, LLMResponse, Role
@@ -27,7 +29,7 @@ class AnthropicClient(LLMClient):
         self._max_tokens = max_tokens
         self._temperature = temperature
 
-    def complete(self, messages: list[LLMMessage], **kwargs: object) -> LLMResponse:
+    def complete(self, messages: list[LLMMessage], **kwargs: Any) -> LLMResponse:
         """Send messages to Claude and return the response.
 
         System messages are extracted and passed via the Anthropic `system` param.
@@ -42,12 +44,14 @@ class AnthropicClient(LLMClient):
             if m.role != Role.SYSTEM
         ]
 
+        model: str = kwargs.get("model", self._model)
+        max_tokens: int = kwargs.get("max_tokens", self._max_tokens)
+
         response = self._client.messages.create(
-            model=kwargs.get("model", self._model),  # type: ignore[arg-type]
-            max_tokens=kwargs.get("max_tokens", self._max_tokens),  # type: ignore[arg-type]
-            temperature=kwargs.get("temperature", self._temperature),  # type: ignore[arg-type]
+            model=model,
+            max_tokens=max_tokens,
             system=system or "",
-            messages=chat_messages,
+            messages=chat_messages,  # type: ignore[arg-type]
         )
 
         return LLMResponse(

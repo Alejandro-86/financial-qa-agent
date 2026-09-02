@@ -2,6 +2,8 @@
 
 import logging
 import time
+from collections.abc import Callable
+from typing import Any
 
 from financial_qa.client.base import LLMClient
 from financial_qa.models.conversation import ConversationTurn
@@ -111,12 +113,12 @@ class PipelineRunner:
         self,
         name: str,
         steps: list[PipelineStep],
-        fn: object,
-    ) -> object:
+        fn: Callable[[], Any],
+    ) -> Any:
         """Run a single step, record it, and return its output or None on error."""
         t0 = time.monotonic()
         try:
-            output = fn()  # type: ignore[operator]
+            output = fn()
             latency = (time.monotonic() - t0) * 1000
             steps.append(PipelineStep(
                 name=name, status=StepStatus.SUCCESS,
