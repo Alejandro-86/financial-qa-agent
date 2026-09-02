@@ -4,11 +4,12 @@ All tests use the StubClient to avoid real LLM calls.
 """
 
 import pytest
-from financial_qa.client.base import LLMClient, LLMMessage, LLMResponse, Role
+
+from financial_qa.client.base import LLMClient, LLMMessage, LLMResponse
 from financial_qa.models.conversation import ConversationTurn
-from financial_qa.pipeline.rewriter import Rewriter
 from financial_qa.pipeline.extractor import Extractor
 from financial_qa.pipeline.reasoner import Reasoner
+from financial_qa.pipeline.rewriter import Rewriter
 
 
 class StubClient(LLMClient):

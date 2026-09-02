@@ -5,6 +5,7 @@ making real API calls.
 """
 
 import pytest
+
 from financial_qa.client.base import LLMClient, LLMMessage, LLMResponse, Role
 
 

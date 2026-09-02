@@ -4,7 +4,7 @@ Execution accuracy with justified numerical tolerance is the headline metric.
 MAPE is a diagnostic for magnitude of error on correct-format predictions.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 def is_correct(

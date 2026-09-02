@@ -1,7 +1,7 @@
 """Orchestrates the four-step pipeline for a single question turn."""
 
-import time
 import logging
+import time
 
 from financial_qa.client.base import LLMClient
 from financial_qa.models.conversation import ConversationTurn

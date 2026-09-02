@@ -1,6 +1,7 @@
 """Unit tests for the evaluation framework — metrics and failure taxonomy."""
 
 import pytest
+
 from financial_qa.eval.metrics import (
     ExecutionAccuracy,
     MeanAbsolutePercentageError,

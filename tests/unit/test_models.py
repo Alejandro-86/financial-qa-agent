@@ -1,6 +1,7 @@
 """Unit tests for Pydantic data models — written before implementation."""
 
 import pytest
+
 from financial_qa.models.conversation import ConversationTurn, Question
 from financial_qa.models.pipeline import (
     ExtractedValue,

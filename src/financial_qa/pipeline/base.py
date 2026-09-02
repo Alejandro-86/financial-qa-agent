@@ -1,7 +1,6 @@
 """Shared prompt-building utilities for pipeline steps."""
 
-from financial_qa.client.base import LLMClient, LLMMessage, Role
-
+from financial_qa.client.base import LLMMessage, Role
 
 SYSTEM_PREAMBLE = (
     "You are a precise financial analysis assistant. "

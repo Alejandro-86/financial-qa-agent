@@ -1,6 +1,7 @@
 """Unit tests for API request/response schemas."""
 
 import pytest
+
 from api.schemas import AskRequest, AskResponse
 from financial_qa.models.pipeline import PipelineResult
 

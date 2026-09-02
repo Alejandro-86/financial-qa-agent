@@ -6,6 +6,7 @@ All edge cases and attack vectors must be covered before implementation.
 """
 
 import pytest
+
 from financial_qa.pipeline.executor import ExecutionError, Executor
 
 
